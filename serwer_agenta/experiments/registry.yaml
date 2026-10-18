@@ -1,0 +1,51 @@
+# Rejestr eksperymentow -- serwer wielokrotnego uzytku.
+# Nowy eksperyment = nowy wpis tutaj (+ ewentualnie nowy plik configs/<scenariusz>.yaml).
+# Kod uslug (app/) pozostaje nietkniety.
+#
+# Pola:
+#   scenario     -- klucz scenariusza; konfiguracja w configs/<scenario>.yaml
+#   group        -- grupa kontrolna A0-A14 (DG 10.2 / dok. towarzyszacy 6.1)
+#   agent_type   -- mock (bez GPU, testy) | llm (przez endpoint OpenAI-compatible)
+#   model        -- konfiguracja warstwy modelu (base_url wymienny: vLLM/Groq/Cerebras)
+#   seed         -- ziarno instancji zadania (determinizm, DG 4.1)
+#   k_max/tau_max/t_max -- budzety [START] (DG 7.4, 5.1); nadpisywalne w overrides
+experiments:
+
+  s1-mock-baseline:
+    description: "S1 gridworld z ukryta pulapka, agent mock BFS z pamiecia Phi (walidacja harnessu, F0)"
+    scenario: S1
+    group: A3
+    agent_type: mock
+    seed: 42
+    k_max: 8
+    tau_max: 3000
+    t_max: 200
+
+  s1-llm-full:
+    description: "S1 gridworld, agent LLM z blokiem Phi w prompcie (pelny system, grupa A3)"
+    scenario: S1
+    group: A3
+    agent_type: llm
+    model:
+      # base_url puste => stub lokalny. Na GPU: http://localhost:8000 (vLLM);
+      # zewnetrznie: https://api.groq.com/openai albo https://api.cerebras.ai
+      base_url: ""
+      model: "qwen3-14b-awq"   # przyklad; zweryfikuj dostepne warianty (dok. wdrozeniowy sek. 3)
+      api_key_env: "LLM_API_KEY"
+    seed: 42
+    k_max: 15
+    tau_max: 3000
+    t_max: 200
+
+  s2-llm-tooluse:
+    description: "S2 tool-use LLM (sekwencja API z ukrytym blednym krokiem) -- scenariusz w przygotowaniu (stub)"
+    scenario: S2
+    group: A3
+    agent_type: llm
+    model:
+      base_url: ""
+      model: "qwen3-32b-awq"
+    seed: 7
+    k_max: 15
+    tau_max: 400
+    t_max: 30

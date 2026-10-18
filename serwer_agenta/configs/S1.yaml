@@ -1,0 +1,35 @@
+# Konfiguracja scenariusza S1: gridworld z ukryta pulapka (DG 9.1).
+# Wartosci [START] -- do kalibracji w fazie F2 (DG 12, Aneks A).
+size: 12
+n_traps: 4
+suspicious_prob: 0.7
+
+# Budzety (DG 7.4, 5.1)
+k_max: 15
+t_max: 200
+tau_max: 3000
+t_check: 10        # kontrola tau_max wewnatrz petli (DG 8.3d)
+w_stagnation: 40   # okno stagnacji W (DG 5.1)
+
+# Koszty (DG 7.1)
+alpha: 0.01
+beta: 0.002
+r_success: 10.0
+p_fatal_base: 1.0
+p_fatal_step: 0.25
+p_end_timeout_factor: 0.8
+p_early_max: 1.0
+p_early_fraction: 0.1
+
+# Mutacje: progi regul R0-R4 (DG 6.2)
+thresholds:
+  r0_fast_fatal_share: 0.30
+  r1_same_strat: 5
+  r2_same_strat: 3
+  r2_same_error: 3
+  r3_no_progress: 2
+mutation_cooldown: 2
+mutation_limit_share: 0.40
+
+# Agent
+max_hypotheses: 5

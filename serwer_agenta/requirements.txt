@@ -1,0 +1,12 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+pyyaml>=6.0
+httpx>=0.27
+
+# --- extras: serwer modelu (tylko na maszynie z GPU) ----------------------
+# Instalacja: pip install -r requirements.txt  oraz osobno:
+#   pip install "vllm>=0.6"      # Kaggle/Colab/Lightning z GPU, serwer vLLM
+# vLLM celowo NIE jest w zaleznosciach bazowych: scaffold musi dzialac
+# bez GPU (smoke test z mock agentem). Na CPU wystarczy zewnetrzny endpoint
+# (Groq/Cerebras) przez LLM_BASE_URL.
