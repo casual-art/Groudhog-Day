@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1424913646.svg)](https://doi.org/10.5281/zenodo.23483377)
+
 # Serwer agenta — „Pętla Świstaka" (scaffold wielokrotnego użytku)
 
 Infrastruktura serwerowa dla projektu „Pętla Świstaka" (DG v1.2): harness
